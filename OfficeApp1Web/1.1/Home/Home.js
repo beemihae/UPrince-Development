@@ -111,12 +111,14 @@
             $(document).on('click', "#logOut", function () {
                 logOut();
             });
+
             $(document).on('input', '#projectSearch', function () {
                 var x = document.getElementById("projectSearch").value;
+                var projectSearch;
                 if (x.length > 2) {
-                    document.getElementById("name").innerHTML = x;
-                };
-                    
+                   projectSearch = x ;
+                } else { projectSearch = "";};
+                document.getElementById("name").innerHTML = projectSearch
             });
 
             $(document).on('click', "#btnSignIn", function () {
@@ -126,7 +128,7 @@
 
                     //app.showNotification(navigator.userAgent);
                     //var child = window.open("http://www.w3schools.com/jsref/prop_nav_useragent.asp");
-                var timer = setInterval(checkChild, 500);
+                    var timer = setInterval(checkChild, 500);
                 } else {
                     window.location.href = "https://uprince-dev.pronovix.net/oauth2/authorize?client_id=thoa4iaGh9aidei8aeb9AiyeesohghaicieGipua6jie1Sai6AiquiegheiZowah&scope=profile&state=CSFR&response_type=token&redirect_uri=https%3A%2F%2Fuprinceworddev.azurewebsites.net%2F1.1%2Fhome%2Fhome.html"
                     //var child = window.open("https://uprince-dev.pronovix.net/oauth2/authorize?client_id=thoa4iaGh9aidei8aeb9AiyeesohghaicieGipua6jie1Sai6AiquiegheiZowah&scope=profile&state=CSFR&response_type=token&redirect_uri=https%3A%2F%2Fuprinceworddev.azurewebsites.net%2F1.1%2Fhome%2Fapp.html", "");
