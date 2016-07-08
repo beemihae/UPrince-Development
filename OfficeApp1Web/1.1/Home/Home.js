@@ -119,6 +119,7 @@
                    projectSearch = x ;
                 } else { projectSearch = "";};
                 document.getElementById("name").innerHTML = projectSearch
+                //document.getElementById("listProjects").innerHTML = "";
             });
 
             $(document).on('click', "#btnSignIn", function () {
@@ -177,7 +178,7 @@
               localStorage.setItem("email", email);
               //window.location.href = "project-page.html"
               $("#project-page").append(projectPage);
-              loadListProjects();
+              loadListProjects("");
               var userId = str.user.uid;
               localStorage.setItem("uId", userId);
               localStorage.setItem('loggedIn', 'true')
@@ -230,7 +231,7 @@
 
 
     //load projects in to projectpage from server
-    function loadListProjects() {
+    function loadListProjects(projectSearch) {
         var email = localStorage.getItem('email')
         var dataEmail = {
             "customer": "",
@@ -248,7 +249,7 @@
                 "Closed": false,
                 "New": false
             },
-            "title": "",
+            "title": projectSearch,
             "toleranceStatus": {
                 "All": true,
                 "OutofTolerance": false,
