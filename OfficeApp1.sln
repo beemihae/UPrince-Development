@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentWriter", "OfficeApp1\ContentWriter.csproj", "{A0CBF51F-6196-416D-9D0B-22EE63A19916}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeApp1Web", "OfficeApp1Web\OfficeApp1Web.csproj", "{7E12AF8C-6C3C-4E10-9A9D-2929065ED5C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0CBF51F-6196-416D-9D0B-22EE63A19916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0CBF51F-6196-416D-9D0B-22EE63A19916}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0CBF51F-6196-416D-9D0B-22EE63A19916}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A0CBF51F-6196-416D-9D0B-22EE63A19916}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0CBF51F-6196-416D-9D0B-22EE63A19916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0CBF51F-6196-416D-9D0B-22EE63A19916}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{7E12AF8C-6C3C-4E10-9A9D-2929065ED5C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E12AF8C-6C3C-4E10-9A9D-2929065ED5C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E12AF8C-6C3C-4E10-9A9D-2929065ED5C1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7E12AF8C-6C3C-4E10-9A9D-2929065ED5C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E12AF8C-6C3C-4E10-9A9D-2929065ED5C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
