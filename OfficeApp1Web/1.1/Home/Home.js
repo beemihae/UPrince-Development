@@ -118,8 +118,9 @@
                 if (x.length > 2) {
                    projectSearch = x ;
                 } else { projectSearch = "";};
-                document.getElementById("name").innerHTML = projectSearch
-                //document.getElementById("listProjects").innerHTML = "";
+                //document.getElementById("name").innerHTML = projectSearch
+                document.getElementById("listProjects").innerHTML = "";
+                loadListProjects(projectSearch);
             });
 
             $(document).on('click', "#btnSignIn", function () {
@@ -265,6 +266,7 @@
             data: JSON.stringify(dataEmail),
         })
           .done(function (str) {
+              document.getElementById("listProjects").innerHTML = ""
               var test = str;
               var length = Object.keys(str).length;
               $("#listProjects").append('<ul id="listProjects" class="nav nav-pills nav-stacked">');
