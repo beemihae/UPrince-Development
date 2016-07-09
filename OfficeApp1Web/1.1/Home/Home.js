@@ -127,14 +127,10 @@
                 previous = x.length;
             });
 
-            window.setInterval(function () {
-                app.showNotification(localStorage.getItem("loggedIn"));
-            }, 5000);
-
             $(document).on('click', "#btnSignIn", function () {
                 if ((navigator.userAgent.indexOf('iPad') != -1) /*|| !(Office.context.requirements.isSetSupported('HtmlCoercion'))*/) { //iPad
-                    var child = window.open("https://uprince-dev.pronovix.net/oauth2/authorize?client_id=thoa4iaGh9aidei8aeb9AiyeesohghaicieGipua6jie1Sai6AiquiegheiZowah&scope=profile&state=CSFR&response_type=token&redirect_uri=https%3A%2F%2Fuprinceworddev.azurewebsites.net%2F1.1%2Fhome%2Fios.html", "");
-                    //window.location.href = "https://uprince-dev.pronovix.net/oauth2/authorize?client_id=thoa4iaGh9aidei8aeb9AiyeesohghaicieGipua6jie1Sai6AiquiegheiZowah&scope=profile&state=CSFR&response_type=token&redirect_uri=https%3A%2F%2Fuprinceworddev.azurewebsites.net%2F1.1%2Fhome%2Fios.html"
+                    //var child = window.open("https://uprince-dev.pronovix.net/oauth2/authorize?client_id=thoa4iaGh9aidei8aeb9AiyeesohghaicieGipua6jie1Sai6AiquiegheiZowah&scope=profile&state=CSFR&response_type=token&redirect_uri=https%3A%2F%2Fuprinceworddev.azurewebsites.net%2F1.1%2Fhome%2Fapp.html", "");
+                    window.location.href = "https://uprince-dev.pronovix.net/oauth2/authorize?client_id=thoa4iaGh9aidei8aeb9AiyeesohghaicieGipua6jie1Sai6AiquiegheiZowah&scope=profile&state=CSFR&response_type=token&redirect_uri=https%3A%2F%2Fuprinceworddev.azurewebsites.net%2F1.1%2Fhome%2Fhome.html"
 
                     //app.showNotification(navigator.userAgent);
                     //var child = window.open("http://www.w3schools.com/jsref/prop_nav_useragent.asp");
@@ -162,18 +158,6 @@
         });
     };
 
-    function checkChild() {
-        if (localStorage.getItem("loggedIn") == 'true') {
-            //$("#closed").append('closed');
-            clearInterval(timer);
-
-            document.getElementById("login").innerHTML = "";
-            document.body.style.backgroundColor = "white";
-            $("#project-page").append(projectPage);
-            loadListProjects();
-            //app.showNotification(navigator.userAgent);
-        }
-    }
 
     //perform this function on the pop-up screen
     function accessUser() {
@@ -231,9 +215,7 @@
               if (str.success) {
                   //app.showNotification("success");
                   window.location.href = "https://uprinceworddev.azurewebsites.net/1.1/home/home.html"
-                  localStorage.setItem("loggedIn", 'false');
-                  localStorage.setItem("email", '');
-                  localStorage.setItem("uId", '');
+                  localStorage.setItem("loggedIn", 'false')
               }
               else app.showNotification("Log out failed, please try again.");
           })
