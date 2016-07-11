@@ -1,0 +1,118 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title></title>
+  <script src="../../Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+  <!--<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>-->
+  <link href="../../Content/Office.css" rel="stylesheet" type="text/css">
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/Office.js" type="text/javascript"></script>
+  <script type="text/javascript" id="HOST" src="https://appsforoffice.microsoft.com/lib/1/hosted/word-mac-16.00.js"></script>
+  <script type="text/javascript" id="OFFICESTRINGS" src="https://appsforoffice.microsoft.com/lib/1/hosted/en-us/office_strings.js"></script>
+
+  <!-- To enable offline debugging using a local reference to Office.js, use:                        -->
+  <!-- <script src="../../Scripts/Office/MicrosoftAjax.js" type="text/javascript"></script>  -->
+  <!-- <script src="../../Scripts/Office/1.1/office.js" type="text/javascript"></script>  -->
+
+  <link href="../App.css" rel="stylesheet" type="text/css">
+  <script src="../App.js" type="text/javascript"></script>
+  <link href="Home.css" rel="stylesheet" type="text/css">
+  <script src="Home.js" type="text/javascript"></script>
+  <iframe style="display:none" src="https://telemetryservice.firstpartyapps.oaspapps.com/telemetryservice/telemetryproxy.html"></iframe>
+  <link rel="shortcut icon" href="/Content/assets/ico/favicon.png">
+  <link rel="icon" href="../Images/icon/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/Content/assets/ico/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/Content/assets/ico/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/Content/assets/ico/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="/Content/assets/ico/apple-touch-icon-57-precomposed.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+  <link rel="stylesheet" href="/Content/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/Content/assets/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/Content/assets/css/form-elements.css">
+  <link rel="stylesheet" href="/Content/assets/css/style.css">
+  <link href="/Content/site.css" rel="stylesheet">
+  <link href="/Content/ng-trans.css" rel="stylesheet">
+  <link href="/Content/bootstrap.css" rel="stylesheet">
+  <link href="/Content/font-awesome.css" rel="stylesheet">
+  <link href="/Content/style.css" rel="stylesheet">
+  <link href="/Content/glyphicons.css" rel="stylesheet">
+  <link href="/Content/ng-modal.css" rel="stylesheet">
+  <link href="/Scripts/text-Editor/textAngular.css" rel="stylesheet">
+  <link href="/Content/summernote.min.css" rel="stylesheet">
+  <link href="/Content/angular-loading-bar/loading-bar.css" rel="stylesheet">
+  <link href="/Content/mindmap.css" rel="stylesheet">
+  <link href="/Content/uprince.css" rel="stylesheet">
+  <link href="/Content/site.css" rel="stylesheet">
+  <link href="/Content/ng-trans.css" rel="stylesheet">
+  <link href="/Content/bootstrap.css" rel="stylesheet">
+  <link href="/Content/font-awesome.css" rel="stylesheet">
+  <link href="/Content/style.css" rel="stylesheet">
+  <link href="/Content/glyphicons.css" rel="stylesheet">
+  <link href="/Content/ng-modal.css" rel="stylesheet">
+  <link href="/Scripts/text-Editor/textAngular.css" rel="stylesheet">
+  <link href="/Content/summernote.min.css" rel="stylesheet">
+  <link href="/Content/angular-loading-bar/loading-bar.css" rel="stylesheet">
+  <link href="/Content/mindmap.css" rel="stylesheet">
+  <link href="/Content/uprince.css" rel="stylesheet">
+</head>
+
+<body style="background-color: white;">
+  <!--[if lte IE 9]>
+          <script>app.showNotification('This app is not supported for IE9. Please use a newer browser')
+          $(document).find('#btnSignIn').prop('disabled', true);
+          </script>
+    <![endif]-->
+  <div id="login"></div>
+  <div id="project-page"></div>
+  <div id="product-description-page">
+    <div class="content-main">
+      <div class="main-wrapper">
+        <header class="col-lg-12 col-md-12 col-sm-12 col-xs-12 header-top">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding full-height">
+            <div id="link-project-page" class="header-sub header-glyph full-height">
+              <p class="fake-link" title="UPrince.Projects"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+              </p>
+            </div>
+            <div class="header-sub h1-div">
+              <h1 id="projectName" class="roboto-light" style="font-weight: 700"><a href="#">Default Project</a></h1> </div>
+            <div class="header-sub" style="position:absolute;right:15px">
+              <p class="fake-link" id="logOut" style="font-size:12px;font-weight: 100; vertical-align: middle"> Log Out</p>
+            </div>
+          </div>
+        </header>
+        <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 modal-div relationship container no-padding">
+          <div class="col-sm-12 row-projects bg-ash alignleft"> <span class="icon-icon_ProductDescription"> </span><strong>Product Descriptions</strong>
+            <button id="saveBt" class="saveButton">Publish</button>
+          </div>
+          <!-- filter -->
+          <!-- menu starts -->
+          <div class="panel-group col-md-12 no-padding">
+            <div id="listContainer">
+              <ul id="expList" class="nav nav-pills nav-stacked collapsibleList" style="margin-top :2px">
+                <li id="5405576" style="height: 38px; padding-left: 5px;"><a href="javascript: void(0);" class="p-l-30">aTest</a> </li>
+                <li id="5405577" style="height: 38px; padding-left: 5px;"><a href="javascript: void(0);" class="p-l-30">product</a> </li>
+                <li id="5405578" style="height: 38px; padding-left: 5px;"><a href="javascript: void(0);" class="p-l-30">product</a> </li>
+                <li id="5405579" style="height: 38px; padding-left: 5px;"><a href="javascript: void(0);" class="p-l-30">product</a> </li>
+                
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <!--<div id="name"> </div>-->
+
+
+
+  <div id="notification-message">
+    <div class="padding">
+      <div id="notification-message-close"></div>
+      <div id="notification-message-header"></div>
+      <div id="notification-message-body"></div>
+    </div>
+  </div>
+</body>
+
+</html>

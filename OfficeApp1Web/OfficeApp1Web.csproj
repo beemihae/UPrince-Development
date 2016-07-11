@@ -153,6 +153,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="1.1\Home\ios.html" />
+    <Content Include="1.1\Home\ios.js" />
     <Content Include="App\App.css" />
     <Content Include="App\App.js" />
     <Content Include="App\Home\App.html" />

@@ -1,4 +1,4 @@
-﻿[ng\:cloak], [ng-cloak], .ng-cloak {
+[ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important;
 }
 /*-----------fonts----------------*/
@@ -117,7 +117,7 @@ cursor:default;
 .p-t-10{padding:10px 0 !important;}
 .p-t-42{padding:42px 0 0 !important;}
 .p-l-10{padding-left:10px !important;}
-.p-l-30{padding-left:30px !important;}
+.p-l-30{padding-left:0px !important;}
 .p-l-0{padding-left:0px !important;}
 .p-lr-30{padding:0 30px !important;}
 .p-r-30{padding-right:30px !important;}
