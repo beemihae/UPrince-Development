@@ -179,6 +179,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Scripts\_references.js" />
+    <Content Include="Images\ico_uprince_16.png" />
+    <Content Include="Images\ico_uprince_32.png" />
+    <Content Include="Images\ico_uprince_80.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
