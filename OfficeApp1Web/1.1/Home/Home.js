@@ -5,7 +5,7 @@
     var projectId;
     var ProductDescriptionId;
     var host = 'https://uprincecoredevapi.azurewebsites.net';
-    var projectPage = '<div class="main-wrapper"> <header class="col-lg-12 col-md-12 col-sm-12 col-xs-12 header-top"> <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding full-height"> <div class="header-sub header-glyph full-height"> <p title="UPrince.Projects"> <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> </div> <div class="header-sub h1-div"> <h1 class="roboto-light">Projects</h1> </div> <div class="header-sub" style="position:absolute;right:15px"><p class="fake-link" id="logOut" style="font-size:12px;font-weight: 100; vertical-align: middle"> Log Out</p> </div></div> </header> <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 modal-div relationship container no-padding"><div><input id="projectSearch"></div> <div id="listProjects" class="nav nav-pills nav-stacked"></div> </section>  </div>'
+    var projectPage = '<div class="main-wrapper"> <header class="col-lg-12 col-md-12 col-sm-12 col-xs-12 header-top"> <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding full-height"> <div class="header-sub header-glyph full-height"> <p title="UPrince.Projects"> <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> </div> <div class="header-sub h1-div"> <h1 class="roboto-light">Projects</h1> </div> <div class="header-sub" style="position:absolute;right:15px"><p class="fake-link" id="logOut" style="font-size:12px;font-weight: 100; vertical-align: middle"> Log Out</p> </div></div> </header> <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 modal-div relationship container no-padding"><div class="col-sm-12 row-projects"><input class=form-control id=projectSearch> <span class="glyphicon form-control-filter glyphicon-filter"aria-hidden=true></span></div> <div id="listProjects" class="nav nav-pills nav-stacked"></div> </section>  </div>'
     var myWindow;
     var previous = 0;
     // The initialize function must be run each time a new page is loaded
@@ -85,7 +85,7 @@
                     getProductDescription();
                     app.showNotification('Desktop version');
                 }*/
-
+                setHeader();
             });
 
             //after selecting all the text, it adapts the prod descrp on the server
@@ -243,6 +243,76 @@
         });
     }
 
+    function setHeader() {
+        Word.run(function (context) {
+
+            // Create a proxy object for the sections collection.
+            var sections = context.document.sections;
+
+            // Queue a commmand to load the text property for all of the sections.
+            context.load(sections, 'text');
+
+            // Synchronize the document state by executing the queued commands, 
+            // and return a promise to indicate task completion.
+            return context.sync()
+                .then(function () {
+
+                    // Insert content into the header.
+                    var headerSection = sections.items[0].getHeader('primary');
+                    headerSection.clear();
+
+                    // Insert content into the footer.
+                    var footerSection = sections.items[0].getFooter('primary');
+                    footerSection.clear();
+
+                    // Synchronize the document state by executing the queued commands, 
+                    // and return a promise to indicate task completion.
+                    return context.sync().then(function () {
+                        showMessage('Success! Removed Header and Footer.');
+                    });
+                });
+        })
+.catch(function (error) {
+    showMessage('Error: ' + JSON.stringify(error));
+    if (error instanceof OfficeExtension.Error) {
+        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+    }
+});
+        // Run a batch operation against the Word object model.
+        Word.run(function (context) {
+
+            // Create a proxy object for the sections collection.
+            var sections = context.document.sections;
+
+            // Queue a commmand to load the text property for all of the sections.
+            context.load(sections, 'text');
+
+            // Synchronize the document state by executing the queued commands, 
+            // and return a promise to indicate task completion.
+            return context.sync().then(function () {
+
+                // Insert content into the header.
+                var headerSection = sections.items[0].getHeader('primary');
+                headerSection.insertText('UPrince', Word.InsertLocation.end);
+
+                // Insert content into the footer.
+                var footerSection = sections.items[0].getFooter('primary');
+                footerSection.insertText('All rights reserved.', Word.InsertLocation.end);
+
+                // Synchronize the document state by executing the queued commands, 
+                // and return a promise to indicate task completion.
+                return context.sync().then(function () {
+                    //showMessage('Success! Added Header and Footer. Select the arrow button to move on.');
+                });
+            });
+        })
+        .catch(function (error) {
+            console.log('Error: ' + JSON.stringify(error));
+            if (error instanceof OfficeExtension.Error) {
+                console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+            }
+        });
+    }
 
     function getToken() {
         var url = window.location.href;
@@ -288,7 +358,7 @@
             data: JSON.stringify(dataEmail),
         })
           .done(function (str) {
-              document.getElementById("listProjects").innerHTML = ""
+              document.getElementById("listProjects").innerHTML = "";
               var test = str;
               var length = Object.keys(str).length;
               $("#listProjects").append('<ul id="listProjects" class="nav nav-pills nav-stacked">');
