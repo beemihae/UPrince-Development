@@ -399,9 +399,10 @@
         var id = [];
         for (var i = 0; i < length; i++) {
             if (str[i].ParentId == null) {
-                var dummy = '<li id="' + str[i].Id + '"style = "height: 38px; padding-left: 5px;text-indent: 5px;"><a href="javascript: void(0);" class="p-l-30">' + str[i].Title + '</a> ';
+                //var dummy = '<li id="' + str[i].Id + '"style = "height: 38px; padding-left: 5px;text-indent: 5px;"><a href="javascript: void(0);" class="p-l-30">' + str[i].Title + '</a> ';
+                var dummy = '<li id="' + str[i].Id + '"style = " padding-left: 5px;text-indent: 5px;"><a href="javascript: void(0);" class="p-l-30" >' + str[i].Title + '</a> ';
                 if (str[i].HasChildren) {
-                    dummy = dummy + '<ul id="L' + str[i].Id + '" class="nav nav-pills nav-stacked"></li>'
+                    dummy = dummy + '<ul id="L' + str[i].Id + '"style = " padding-left: 5px;text-indent: 5px;" class="nav nav-pills nav-stacked"></li>'
                 } else {
                     dummy = dummy + '</li>'
 

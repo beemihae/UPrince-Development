@@ -813,7 +813,7 @@ input[type='checkbox']:checked + .label-span{
     border-top: medium none;
     padding: 0 15px !important;
 }
-.popover-content-sub .nav-text-long{padding: 15px 0px;}
+.popover-content-sub .nav-text-long{padding: 10px 0px;}
 .project-info-div,.project-menu-table{
     width: 100%;
     padding: 0px;
