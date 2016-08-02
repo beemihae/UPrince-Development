@@ -118,10 +118,10 @@
                 var projectSearch;
                 var update;
                 if (x.length > 2) {
-                    projectSearch = x ;
-                } else { projectSearch = "";};
+                    projectSearch = x;
+                } else { projectSearch = ""; };
                 //document.getElementById("name").innerHTML = projectSearch
-                if((previous == 1) && (x.length == 2)){};
+                if ((previous == 1) && (x.length == 2)) { };
                 document.getElementById("listProjects").innerHTML = "";
                 loadListProjects(projectSearch);
                 previous = x.length;
@@ -272,12 +272,6 @@
                     });
                 });
         })
-.catch(function (error) {
-    showMessage('Error: ' + JSON.stringify(error));
-    if (error instanceof OfficeExtension.Error) {
-        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
-    }
-});
         // Run a batch operation against the Word object model.
         Word.run(function (context) {
 

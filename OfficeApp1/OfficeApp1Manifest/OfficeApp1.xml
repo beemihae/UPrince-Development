@@ -164,12 +164,12 @@
         <bt:Image id="Contoso.FunctionButton.Icon" DefaultValue="https://i.imgur.com/qDujiX0.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="Contoso.FunctionFile.Url" DefaultValue="https://uprinceworddev.azurewebsites.net/1.1/Home/test.html" />
+        <bt:Url id="Contoso.FunctionFile.Url" DefaultValue="https://uprinceworddev.azurewebsites.net/1.1/Home/FunctionFile.html" />
         <bt:Url id="Contoso.Taskpane1.Url" DefaultValue="https://uprinceworddev.azurewebsites.net/1.1/Home/Home.html" />
         <bt:Url id="Contoso.Taskpane2.Url" DefaultValue="https://uprinceworddev.azurewebsites.net/1.1/Home/Home.html" />
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="Contoso.FunctionButton.Label" DefaultValue="Execute function" />
+        <bt:String id="Contoso.FunctionButton.Label" DefaultValue="Commit" />
         <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Show Taskpane" />
         <bt:String id="Contoso.Dropdown.Label" DefaultValue="Dropdown" />
         <bt:String id="Contoso.Item1.Label" DefaultValue="Show Taskpane 1" />

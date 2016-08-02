@@ -15,12 +15,16 @@
     <script>
         // The initialize function must be run each time a new page is loaded
         (function () {
+            var host = 'https://uprincecoredevapi.azurewebsites.net';
+
             Office.initialize = function (reason) {
-               //If you need to initialize something you can do so here.
+                //app.initialize();
+                //If you need to initialize something you can do so here.
             };
         })();
-            //Notice function needs to be in global namespace
+        //Notice function needs to be in global namespace
         function writeText(event) {
+            var ID = localStorage.getItem('productDescriptionId');
             //Consult Office.js API reference to see all you can do. This just shows the simplest action.
             Office.context.document.setSelectedDataAsync("ExecuteFunction Works with Prod Office.js Button ID=",
                 function (asyncResult) {
@@ -32,8 +36,29 @@
                         //show success.Upcoming displayDialog API will help here.
                     }
                 });
-           //Required, call event.completed to let the platform know you are done processing.
-	   event.completed();
+
+
+            app.showNotification("hekki");
+            $.ajax({
+                type: "POST",
+                url: "https://uprincecoredevapi.azurewebsites.net/api/productdescription/PostRTValue",
+                dataType: "json",
+                data: {
+                    "ProductDescriptionIndex": "1",
+                    "ProductDescriptionId": "5405576",
+                    "ProductDescriptionProperty": "hhello"
+                },
+                success: function () {
+                    app.showNotification("succes")
+
+                },
+
+                error: function () {
+                    app.showNotification('Error');
+                }
+            });
+            //Required, call event.completed to let the platform know you are done processing.
+            event.completed();
         }
     </script>
 </head>
