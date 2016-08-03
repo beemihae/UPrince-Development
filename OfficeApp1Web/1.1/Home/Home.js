@@ -10,156 +10,156 @@
     var previous = 0;
     // The initialize function must be run each time a new page is loaded
     Office.initialize = function (reason) {
-        $(document).ready(function () {
-            app.initialize();
-            localStorage.setItem("loggedIn", 'false');
+    $(document).ready(function () {
+        app.initialize();
+        localStorage.setItem("loggedIn", 'false');
 
-            accessUser()
+        accessUser()
 
 
-            //after log in go to project page, clicking sign in button
-            /*$(document).on("click", "#btnSignIn", function () {
-                //app.showNotification(JSON.stringify(bowser, null, '    '));
-                var x = document.getElementById("email");
-                var email = x.elements[0].value;
-                if (email.length != 0) {
-                    localStorage.setItem("email", email);
-                    //window.location.href = "../project-page.html"
+        //after log in go to project page, clicking sign in button
+        /*$(document).on("click", "#btnSignIn", function () {
+            //app.showNotification(JSON.stringify(bowser, null, '    '));
+            var x = document.getElementById("email");
+            var email = x.elements[0].value;
+            if (email.length != 0) {
+                localStorage.setItem("email", email);
+                //window.location.href = "../project-page.html"
+                document.getElementById("login").innerHTML = "";
+                document.body.style.backgroundColor = "white";
+                $("#project-page").append(projectPage);
+                loadListProjects();
+            }
+            else {
+                app.showNotification('Please enter login');
+            }
+        });*/
+
+        //after log in go to project page, enter in emailfield
+        /* $(document).submit("#email", function (event) {
+             document.body.style.backgroundColor = "white";
+             var x = document.getElementById("email");
+             var email = x.elements[0].value;
+             localStorage.setItem("email", email);
+             //window.location.href = "project-page.html"
+             document.getElementById("login").innerHTML = "";
+             $("#project-page").append(projectPage);
+             loadListProjects();
+         })*/
+
+        //go to product description page, after clicking a project
+        $(document).on('click', "#listProjects li", function () {
+            var projectId = $(this).attr("id");
+            localStorage.setItem("projectId", projectId);
+            var projectName = document.getElementById(projectId).innerHTML;
+            //alert(projectName);
+            localStorage.setItem('projectName', projectName);
+            //window.location.href = "product-description-page.html"
+            document.getElementById("project-page").innerHTML = "";
+            var productDescriptionPageWord = '<div class="content-main"> <div class="main-wrapper"> <header class="col-lg-12 col-md-12 col-sm-12 col-xs-12 header-top"> <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding full-height"> <div id="link-project-page" class="header-sub header-glyph full-height"><p class="fake-link" title="UPrince.Projects"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></p></div> <div class="header-sub h1-div"> <h1 id="projectName" class="roboto-light" style="font-weight: 700"></h1> </div> <div class="header-sub" style="position:absolute;right:15px"><p class="fake-link" id="logOut" style="font-size:12px;font-weight: 100; vertical-align: middle"> Log Out</p> </div> </div> </header> <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 modal-div relationship container no-padding"><div class="col-sm-12 row-projects"><input class=form-control id=productSearch> <span class="glyphicon form-control-filter glyphicon-filter"aria-hidden=true></span></div> <div class="col-sm-12 row-projects bg-ash alignleft"> <span class="icon-icon_ProductDescription"> </span><strong>Product Descriptions</strong> <button id="saveBt" class="saveButton">Publish</button> </div> <!-- filter --><!-- menu starts --> <div class="panel-group col-md-12 no-padding"> <div id="listContainer"> <ul id="expList" class="nav nav-pills nav-stacked collapsibleList" style = "margin-top :2px" ></ul></div> </div> </section> </div> </div>';
+            var productDescriptionPageOnline = '<div class="content-main"> <div class="main-wrapper"> <header class="col-lg-12 col-md-12 col-sm-12 col-xs-12 header-top"> <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding full-height"> <div id="link-project-page" class="header-sub header-glyph full-height"><p class="fake-link" title="UPrince.Projects"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></p></div> <div class="header-sub h1-div"> <h1 id="projectName" class="roboto-light" style="font-weight: 700"></h1> </div> <div class="header-sub" style="position:absolute;right:15px"><p class="fake-link" id="logOut" style="font-size:12px;font-weight: 100; vertical-align: middle"> Log Out</p> </div> </div> </header> <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 modal-div relationship container no-padding"><div class="col-sm-12 row-projects"><input class=form-control id=productSearch> <span class="glyphicon form-control-filter glyphicon-filter"aria-hidden=true></span></div> <div class="col-sm-12 row-projects bg-ash alignleft"> <span class="icon-icon_ProductDescription"> </span><strong>Product Descriptions</strong> </div> <!-- filter --><!-- menu starts --> <div class="panel-group col-md-12 no-padding"> <div id="listContainer"> <ul id="expList" class="nav nav-pills nav-stacked collapsibleList" style = "margin-top :2px"></ul></div> </div> </section> </div> </div>';
+            $('#product-description-page').append(productDescriptionPageWord);
+            $(document).find('#saveBt').prop('disabled', false);
+
+            loadList()
+
+
+        });
+
+        //click a product description, and opens a prod description
+        $(document).on("click", 'ul li', function (e) {
+            e.stopPropagation();
+            localStorage.setItem('productDescriptionId', $(this).attr('id'));
+            var div = $("<div>");
+            Office.context.document.setSelectedDataAsync(div.html(), {
+                coercionType: "html"
+            }, testForSuccess);
+            getProductDescription();
+            /*if (Microsoft.Office.WebExtension.context.document instanceof OSF.DDA.ExcelWebAppDocument) {
+                getProductDescription();
+                app.showNotification('Publish is not supported by office online.');
+                $(document).find('#saveBt').prop('disabled', true);
+            }
+
+            else (Microsoft.Office.WebExtension.context.document instanceof OSF.DDA.ExcelDocument) {
+                getProductDescription();
+                app.showNotification('Desktop version');
+            }*/
+            setHeader();
+        });
+
+        //after selecting all the text, it adapts the prod descrp on the server
+        $(document).on("click", "#saveBt", function () {
+            //saveJson();
+            if (Office.context.requirements.isSetSupported('HtmlCoercion')) {
+                saveJson();
+            }
+            else {
+                app.showNotification('You can only "Publish" with Office Desktop (PC/MAC).')
+            }
+        });
+
+        //go back from prod descrp page to project page
+        $(document).on("click", "#link-project-page", function () {
+            document.getElementById("product-description-page").innerHTML = "";
+            document.getElementById("login").innerHTML = "";
+            $("#project-page").append(projectPage);
+            loadListProjects();
+            document.getElementById("product-description-page").innerHTML = "";
+        });
+
+        //log out function, forget the email and go back to log out screen
+        $(document).on('click', "#logOut", function () {
+            logOut();
+        });
+
+        $(document).on('input', '#projectSearch', function () {
+            var x = document.getElementById("projectSearch").value;
+            var projectSearch;
+            var update;
+            if (x.length > 2) {
+                projectSearch = x;
+            } else { projectSearch = ""; };
+            //document.getElementById("name").innerHTML = projectSearch
+            if ((previous == 1) && (x.length == 2)) { };
+            document.getElementById("listProjects").innerHTML = "";
+            loadListProjects(projectSearch);
+            previous = x.length;
+        });
+
+        /*window.setInterval(function () {
+            app.showNotification(localStorage.getItem("uId"));
+        }, 5000);
+        */
+        $(document).on('click', "#btnSignIn", function () {
+            if ((navigator.userAgent.indexOf('iPad') != -1) /*|| !(Office.context.requirements.isSetSupported('HtmlCoercion'))*/) { //iPad
+                var child = window.open("https://uprince-dev.pronovix.net/oauth2/authorize?client_id=thoa4iaGh9aidei8aeb9AiyeesohghaicieGipua6jie1Sai6AiquiegheiZowah&scope=profile&state=CSFR&response_type=token&redirect_uri=https%3A%2F%2Fuprinceworddev.azurewebsites.net%2F1.1%2Fhome%2Fios.html", "");
+                //window.location.href = "https://uprince-dev.pronovix.net/oauth2/authorize?client_id=thoa4iaGh9aidei8aeb9AiyeesohghaicieGipua6jie1Sai6AiquiegheiZowah&scope=profile&state=CSFR&response_type=token&redirect_uri=https%3A%2F%2Fuprinceworddev.azurewebsites.net%2F1.1%2Fhome%2Fios.html"
+
+                //app.showNotification(navigator.userAgent);
+                //var child = window.open("http://www.w3schools.com/jsref/prop_nav_useragent.asp");
+                var timer = setInterval(checkChild, 500);
+            } else {
+                window.location.href = "https://uprince-dev.pronovix.net/oauth2/authorize?client_id=thoa4iaGh9aidei8aeb9AiyeesohghaicieGipua6jie1Sai6AiquiegheiZowah&scope=profile&state=CSFR&response_type=token&redirect_uri=https%3A%2F%2Fuprinceworddev.azurewebsites.net%2F1.1%2Fhome%2Fhome.html"
+                //var child = window.open("https://uprince-dev.pronovix.net/oauth2/authorize?client_id=thoa4iaGh9aidei8aeb9AiyeesohghaicieGipua6jie1Sai6AiquiegheiZowah&scope=profile&state=CSFR&response_type=token&redirect_uri=https%3A%2F%2Fuprinceworddev.azurewebsites.net%2F1.1%2Fhome%2Fapp.html", "");
+
+                //app.showNotification(navigator.userAgent);
+            }
+            function checkChild() {
+                if (localStorage.getItem("loggedIn") == 'true') {
+                    //$("#closed").append('closed');
+                    clearInterval(timer);
+
                     document.getElementById("login").innerHTML = "";
                     document.body.style.backgroundColor = "white";
                     $("#project-page").append(projectPage);
                     loadListProjects();
-                }
-                else {
-                    app.showNotification('Please enter login');
-                }
-            });*/
-
-            //after log in go to project page, enter in emailfield
-            /* $(document).submit("#email", function (event) {
-                 document.body.style.backgroundColor = "white";
-                 var x = document.getElementById("email");
-                 var email = x.elements[0].value;
-                 localStorage.setItem("email", email);
-                 //window.location.href = "project-page.html"
-                 document.getElementById("login").innerHTML = "";
-                 $("#project-page").append(projectPage);
-                 loadListProjects();
-             })*/
-
-            //go to product description page, after clicking a project
-            $(document).on('click', "#listProjects li", function () {
-                var projectId = $(this).attr("id");
-                localStorage.setItem("projectId", projectId);
-                var projectName = document.getElementById(projectId).innerHTML;
-                //alert(projectName);
-                localStorage.setItem('projectName', projectName);
-                //window.location.href = "product-description-page.html"
-                document.getElementById("project-page").innerHTML = "";
-                var productDescriptionPageWord = '<div class="content-main"> <div class="main-wrapper"> <header class="col-lg-12 col-md-12 col-sm-12 col-xs-12 header-top"> <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding full-height"> <div id="link-project-page" class="header-sub header-glyph full-height"><p class="fake-link" title="UPrince.Projects"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></p></div> <div class="header-sub h1-div"> <h1 id="projectName" class="roboto-light" style="font-weight: 700"></h1> </div> <div class="header-sub" style="position:absolute;right:15px"><p class="fake-link" id="logOut" style="font-size:12px;font-weight: 100; vertical-align: middle"> Log Out</p> </div> </div> </header> <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 modal-div relationship container no-padding"> <div class="col-sm-12 row-projects bg-ash alignleft"> <span class="icon-icon_ProductDescription"> </span><strong>Product Descriptions</strong> <button id="saveBt" class="saveButton">Publish</button> </div> <!-- filter --><!-- menu starts --> <div class="panel-group col-md-12 no-padding"> <div id="listContainer"> <ul id="expList" class="nav nav-pills nav-stacked collapsibleList" style = "margin-top :2px" ></ul></div> </div> </section> </div> </div>';
-                var productDescriptionPageOnline = '<div class="content-main"> <div class="main-wrapper"> <header class="col-lg-12 col-md-12 col-sm-12 col-xs-12 header-top"> <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding full-height"> <div id="link-project-page" class="header-sub header-glyph full-height"><p class="fake-link" title="UPrince.Projects"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></p></div> <div class="header-sub h1-div"> <h1 id="projectName" class="roboto-light" style="font-weight: 700"></h1> </div> <div class="header-sub" style="position:absolute;right:15px"><p class="fake-link" id="logOut" style="font-size:12px;font-weight: 100; vertical-align: middle"> Log Out</p> </div> </div> </header> <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12 modal-div relationship container no-padding"> <div class="col-sm-12 row-projects bg-ash alignleft"> <span class="icon-icon_ProductDescription"> </span><strong>Product Descriptions</strong> </div> <!-- filter --><!-- menu starts --> <div class="panel-group col-md-12 no-padding"> <div id="listContainer"> <ul id="expList" class="nav nav-pills nav-stacked collapsibleList" style = "margin-top :2px"></ul></div> </div> </section> </div> </div>';
-                $('#product-description-page').append(productDescriptionPageWord);
-                $(document).find('#saveBt').prop('disabled', false);
-
-                loadList()
-
-
-            });
-
-            //click a product description, and opens a prod description
-            $(document).on("click", 'ul li', function (e) {
-                e.stopPropagation();
-                localStorage.setItem('productDescriptionId', $(this).attr('id'));
-                var div = $("<div>");
-                Office.context.document.setSelectedDataAsync(div.html(), {
-                    coercionType: "html"
-                }, testForSuccess);
-                getProductDescription();
-                /*if (Microsoft.Office.WebExtension.context.document instanceof OSF.DDA.ExcelWebAppDocument) {
-                    getProductDescription();
-                    app.showNotification('Publish is not supported by office online.');
-                    $(document).find('#saveBt').prop('disabled', true);
-                }
-    
-                else (Microsoft.Office.WebExtension.context.document instanceof OSF.DDA.ExcelDocument) {
-                    getProductDescription();
-                    app.showNotification('Desktop version');
-                }*/
-                setHeader();
-            });
-
-            //after selecting all the text, it adapts the prod descrp on the server
-            $(document).on("click", "#saveBt", function () {
-                //saveJson();
-                if (Office.context.requirements.isSetSupported('HtmlCoercion')) {
-                    saveJson();
-                }
-                else {
-                    app.showNotification('You can only "Publish" with Office Desktop (PC/MAC).')
-                }
-            });
-
-            //go back from prod descrp page to project page
-            $(document).on("click", "#link-project-page", function () {
-                document.getElementById("product-description-page").innerHTML = "";
-                document.getElementById("login").innerHTML = "";
-                $("#project-page").append(projectPage);
-                loadListProjects();
-                document.getElementById("product-description-page").innerHTML = "";
-            });
-
-            //log out function, forget the email and go back to log out screen
-            $(document).on('click', "#logOut", function () {
-                logOut();
-            });
-
-            $(document).on('input', '#projectSearch', function () {
-                var x = document.getElementById("projectSearch").value;
-                var projectSearch;
-                var update;
-                if (x.length > 2) {
-                    projectSearch = x;
-                } else { projectSearch = ""; };
-                //document.getElementById("name").innerHTML = projectSearch
-                if ((previous == 1) && (x.length == 2)) { };
-                document.getElementById("listProjects").innerHTML = "";
-                loadListProjects(projectSearch);
-                previous = x.length;
-            });
-
-            /*window.setInterval(function () {
-                app.showNotification(localStorage.getItem("uId"));
-            }, 5000);
-            */
-            $(document).on('click', "#btnSignIn", function () {
-                if ((navigator.userAgent.indexOf('iPad') != -1) /*|| !(Office.context.requirements.isSetSupported('HtmlCoercion'))*/) { //iPad
-                    var child = window.open("https://uprince-dev.pronovix.net/oauth2/authorize?client_id=thoa4iaGh9aidei8aeb9AiyeesohghaicieGipua6jie1Sai6AiquiegheiZowah&scope=profile&state=CSFR&response_type=token&redirect_uri=https%3A%2F%2Fuprinceworddev.azurewebsites.net%2F1.1%2Fhome%2Fios.html", "");
-                    //window.location.href = "https://uprince-dev.pronovix.net/oauth2/authorize?client_id=thoa4iaGh9aidei8aeb9AiyeesohghaicieGipua6jie1Sai6AiquiegheiZowah&scope=profile&state=CSFR&response_type=token&redirect_uri=https%3A%2F%2Fuprinceworddev.azurewebsites.net%2F1.1%2Fhome%2Fios.html"
-
-                    //app.showNotification(navigator.userAgent);
-                    //var child = window.open("http://www.w3schools.com/jsref/prop_nav_useragent.asp");
-                    var timer = setInterval(checkChild, 500);
-                } else {
-                    window.location.href = "https://uprince-dev.pronovix.net/oauth2/authorize?client_id=thoa4iaGh9aidei8aeb9AiyeesohghaicieGipua6jie1Sai6AiquiegheiZowah&scope=profile&state=CSFR&response_type=token&redirect_uri=https%3A%2F%2Fuprinceworddev.azurewebsites.net%2F1.1%2Fhome%2Fhome.html"
-                    //var child = window.open("https://uprince-dev.pronovix.net/oauth2/authorize?client_id=thoa4iaGh9aidei8aeb9AiyeesohghaicieGipua6jie1Sai6AiquiegheiZowah&scope=profile&state=CSFR&response_type=token&redirect_uri=https%3A%2F%2Fuprinceworddev.azurewebsites.net%2F1.1%2Fhome%2Fapp.html", "");
-
                     //app.showNotification(navigator.userAgent);
                 }
-                function checkChild() {
-                    if (localStorage.getItem("loggedIn") == 'true') {
-                        //$("#closed").append('closed');
-                        clearInterval(timer);
+            }
 
-                        document.getElementById("login").innerHTML = "";
-                        document.body.style.backgroundColor = "white";
-                        $("#project-page").append(projectPage);
-                        loadListProjects();
-                        //app.showNotification(navigator.userAgent);
-                    }
-                }
-
-            })
-        });
+        })
+    });
     };
 
     function checkChild() {
@@ -372,7 +372,8 @@
         $("#listProductDescription").html('');
         var projectId = localStorage.getItem('projectId'); //when using the login-screen
         //var projectId = '22050'; //to test just this page
-        var urlProject = host + '/api/ProductDescription/GetAllProductDescription?projectId=' + projectId;
+        getProductDescriptionList("");
+        /*var urlProject = host + '/api/ProductDescription/GetAllProductDescription?projectId=' + projectId;
 
         $.ajax({
             type: 'GET',
@@ -383,7 +384,7 @@
         })
           .done(function (str) {
               organizeList(str);
-          })
+          })*/
     };
 
     //lay out from prod descpr page
@@ -428,6 +429,142 @@
 
     };
 
+    function getProductDescriptionList(parentId) {
+        var projectId = localStorage.getItem('projectId');
+        var dataEmail = {
+            "category": {
+                "All": true,
+                "I": false,
+                "E": false
+            },
+            "projectId": projectId,
+            "itemId": "",
+            "version": "",
+            "title": "",
+            "identifier": "",
+            "type": {
+                "All": true,
+                "T1": false,
+                "T2": false,
+                "T3": false
+            },
+            "state": {
+                "All": true,
+                "New": false,
+                "Draft": false,
+                "Approval": false,
+                "Version": false
+            },
+            "isFocused": {
+                "item": false,
+                "version": false,
+                "title": false
+            },
+            "currentPage": 1,
+            "totalRecords": 0,
+            "sorting": "",
+            "parentid": null,
+            "sortField": "title",
+            "sortOrder": "ASC"
+        };
+        $.ajax({
+            type: "POST",
+            url: host + "/api/productdescription/GetProductDescriptionList",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(dataEmail),
+        })
+          .done(function (str) {
+              organizeListPD(str);
+          });
+    };
+
+    function organizeListPD(str) {
+        for (var i = 0; i < str.length; i++) {
+
+            //var dummy = '<li id="' + str[i].Id + '"style = "height: 38px; padding-left: 5px;text-indent: 5px;"><a href="javascript: void(0);" class="p-l-30">' + str[i].Title + '</a> ';
+            var dummy = '<li id="' + str[i].Id + '"style = " padding-left: 5px;text-indent: 5px;"><a href="javascript: void(0);" class="p-l-30" >' + str[i].Title + '</a> ';
+            if (str[i].HasChildren) {
+                dummy = dummy + '<ul id="L' + str[i].Id + '"style = " padding-left: 5px;text-indent: 5px;" class="nav nav-pills nav-stacked"></li>'
+                $("#expList").append(dummy);
+                appendChildren(str[i].Id);
+
+            } else {
+                dummy = dummy + '</li>'
+                $("#expList").append(dummy);
+            }
+
+            //count++;
+            //id.push("" + str[i].Id)
+
+
+        };
+    };
+
+    function appendChildren(parentId) {
+        var projectId = localStorage.getItem('projectId');
+        var dataEmail = {
+            "category": {
+                "All": true,
+                "I": false,
+                "E": false
+            },
+            "projectId": projectId,
+            "itemId": "",
+            "version": "",
+            "title": "",
+            "identifier": "",
+            "type": {
+                "All": true,
+                "T1": false,
+                "T2": false,
+                "T3": false
+            },
+            "state": {
+                "All": true,
+                "New": false,
+                "Draft": false,
+                "Approval": false,
+                "Version": false
+            },
+            "isFocused": {
+                "item": false,
+                "version": false,
+                "title": false
+            },
+            "currentPage": 1,
+            "totalRecords": 0,
+            "sorting": "",
+            "parentid": parentId,
+            "sortField": "title",
+            "sortOrder": "ASC"
+        };
+        $.ajax({
+            type: "POST",
+            url: host + "/api/productdescription/GetProductDescriptionList",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(dataEmail),
+        })
+          .done(function (str) {
+              organizeChild(str, parentId);
+          });
+    };
+
+    function organizeChild(str, parentId) {
+        for (var i = 0; i < str.length; i++) {
+            var dummy = '<li id="' + str[i].Id + '"style = " padding-left: 5px;text-indent: 5px;"><a href="javascript: void(0);" class="p-l-30" >' + str[i].Title + '</a> ';
+            if (str[i].HasChildren) {
+                dummy = dummy + '<ul id="L' + str[i].Id + '" class="nav nav-pills nav-stacked" "style = "height: 35px"></li>';
+                $("#L" + parentId).append(dummy);
+                appendChildren(str[i].Id)
+            } else {
+                dummy = dummy + '</li>'
+                $("#L" + parentId).append(dummy);
+            }
+        }
+
+    };
     //expand and colllapse list, not in use
     function prepareList() {
         $('#expList').find('li:has(ul)')
